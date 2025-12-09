@@ -1,6 +1,6 @@
 // js/gestionProductos.js
 
-const API_BASE = window.API_BASE || 'http://127.0.0.1:3000';
+const API_BASE = 'https://backend-naty.onrender.com';
 const API_PRODUCTS = (p = '') => `${API_BASE}/api/productos${p}`;
 const API_PROV = (p = '') => `${API_BASE}/api/productos/proveedores${p}`;
 const $ = (s) => document.querySelector(s);

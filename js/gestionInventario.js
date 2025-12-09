@@ -1,6 +1,6 @@
 // frontend/js/gestionInventario.js
 (() => {
-  const API_BASE = window.API_BASE || 'http://127.0.0.1:3000';
+  const API_BASE = 'https://backend-naty.onrender.com';
 
   const callApi = window.api || (async (path, opts = {}) => {
     const headers = Object.assign(

@@ -1,6 +1,6 @@
 // js/gestionProveedores.js
 
-const API_BASE = 'http://127.0.0.1:3000';
+const API_BASE = 'https://backend-naty.onrender.com';
 const API = (p = '') => `${API_BASE}/api/proveedores${p}`;
 const $  = (s) => document.querySelector(s);
 
