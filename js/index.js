@@ -51,7 +51,7 @@ if (form) {
     const password = passInput.value.trim();
 
     try {
-      const resp = await fetch('http://localhost:3000/api/auth/login', {
+      const resp = await fetch('https://backend-naty.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ correo, password })

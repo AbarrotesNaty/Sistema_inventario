@@ -157,5 +157,5 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    window.location.href = "login.html"; // 🔥 Ahora sí manda al login
+    window.location.href = "index.html"; // 🔥 Ahora sí manda al login
 });
