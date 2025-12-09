@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Ventas - Tienda NATY</title>
+    <link rel="stylesheet" href="css/gestionVentas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <nav class="sidebar">
+            <h1 class="logo">Tienda NATY</h1>
+            <ul class="menu">
+                <li><a href="gestionProductos.html"><i class="fas fa-box"></i> Productos</a></li>
+                <li><a href="controlCompras.html"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                <li><a href="gestionInventario.html"><i class="fas fa-warehouse"></i> Inventario</a></li>
+                <li><a href="gestionVentas.html" class="active"><i class="fas fa-cash-register"></i> Ventas</a></li>
+                <li><a href="reportesEstadisticas.html"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                <li><a href="gestionProveedores.html"><i class="fas fa-truck"></i> Proveedores</a></li>
+                <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="cobrar.html"><i class="fas fa-money-bill-wave"></i> Cobrar</a></li>
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                 </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+
+            <header class="top-bar">
+                <h1>Gestión de Ventas</h1>
+            </header>
+
+            <!-- KPIs -->
+            <div class="sales-summary">
+
+                <div class="summary-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <div class="summary-info">
+                        <h3>Ventas del Día</h3>
+                        <p id="ventasDia">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <i class="fas fa-money-bill-trend-up"></i>
+                    <div class="summary-info">
+                        <h3>Ganancia del Día</h3>
+                        <p id="gananciaDia">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <i class="fas fa-shopping-bag"></i>
+                    <div class="summary-info">
+                        <h3>Total Ventas</h3>
+                        <p id="totalVentas">0</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <i class="fas fa-box"></i>
+                    <div class="summary-info">
+                        <h3>Productos Vendidos</h3>
+                        <p id="productosVendidos">0</p>
+                    </div>
+                </div>
+
+                <div class="summary-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="summary-info">
+                        <h3>Promedio por Venta</h3>
+                        <p id="promedioVenta">$0.00</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- FILTROS (SOLO FECHA + MOSTRAR ANULADAS) -->
+            <div class="sales-controls">
+                <div class="filter-options">
+
+                    <div class="date-filter">
+                        <label>Desde:</label>
+                        <input type="date" class="date-input" id="desdeFiltro">
+                    </div>
+
+                    <div class="date-filter">
+                        <label>Hasta:</label>
+                        <input type="date" class="date-input" id="hastaFiltro">
+                    </div>
+
+                    <!-- Botón mostrar anuladas -->
+                    <button class="filter-select" id="toggleAnuladasBtn">
+                        Mostrar anuladas
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- LISTA DE VENTAS -->
+            <div class="sales-list" id="salesList">
+                <!-- AQUÍ SE CARGAN LAS VENTAS DINÁMICAS -->
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/gestionVentas.js"></script>
+
+</body>
+</html>

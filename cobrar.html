@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cobrar - Tienda NATY</title>
+    <link rel="stylesheet" href="css/cobrar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h1 class="logo">Tienda NATY</h1>
+            <ul class="menu">
+                <li><a href="gestionProductos.html"><i class="fas fa-box"></i> Productos</a></li>
+                <li><a href="controlCompras.html"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                <li><a href="gestionInventario.html"><i class="fas fa-warehouse"></i> Inventario</a></li>
+                <li><a href="gestionVentas.html"><i class="fas fa-cash-register"></i> Ventas</a></li>
+                <li><a href="reportesEstadisticas.html"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                <li><a href="gestionProveedores.html"><i class="fas fa-truck"></i> Proveedores</a></li>
+                <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="cobrar.html" class="active"><i class="fas fa-money-bill-wave"></i> Cobrar</a></li>
+                
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                 </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <div class="pos-container">
+                <div class="sale-section">
+
+                    <div class="barcode-input">
+                        <input type="text" id="barcode" placeholder="Escanear código de barras..." autofocus>
+                        <i class="fas fa-barcode"></i>
+                    </div>
+
+                    <div class="products-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unit.</th>
+                                    <th>Total</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="sale-items">
+                                <!-- Productos agregados dinámicamente -->
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="payment-section">
+
+                    <div class="sale-summary">
+                        <div class="summary-item">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+
+                        <!-- IVA ELIMINADO -->
+
+                        <div class="summary-item total">
+                            <span>Total:</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="payment-method">
+                        <h3>Método de Pago</h3>
+
+                        <div class="payment-options">
+                            <button class="payment-btn active">
+                                <i class="fas fa-money-bill-wave"></i>
+                                Efectivo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="cash-input">
+                        <label>Efectivo Recibido:</label>
+                        <div class="input-group">
+                            <span>$</span>
+                            <input type="number" id="cash-received" placeholder="0.00">
+                        </div>
+
+                        <div class="change">
+                            <span>Cambio:</span>
+                            <span id="cambio">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="complete-sale">
+                        <i class="fas fa-check-circle"></i>
+                        Completar Venta
+                    </button>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- IMPORTAR JAVASCRIPT EXTERNO -->
+    <script src="js/cobrar.js"></script>
+
+</body>
+</html>

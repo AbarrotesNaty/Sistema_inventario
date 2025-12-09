@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Proveedores - Tienda NATY</title>
+    <link rel="stylesheet" href="css/gestionProveedores.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h1 class="logo">Tienda NATY</h1>
+            <ul class="menu">
+                <li><a href="gestionProductos.html"><i class="fas fa-box"></i> Productos</a></li>
+                <li><a href="controlCompras.html"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                <li><a href="gestionInventario.html"><i class="fas fa-warehouse"></i> Inventario</a></li>
+                <li><a href="gestionVentas.html"><i class="fas fa-cash-register"></i> Ventas</a></li>
+                <li><a href="reportesEstadisticas.html"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                <li><a href="gestionProveedores.html" class="active"><i class="fas fa-truck"></i> Proveedores</a></li>
+                <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="cobrar.html"><i class="fas fa-money-bill-wave"></i> Cobrar</a></li>
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                 </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Gestión de Proveedores</h1>
+                <button class="btn-add" onclick="openModal('new')">
+                    <i class="fas fa-plus"></i> Nuevo Proveedor
+                </button>
+            </header>
+
+            <div class="search-container">
+                <input type="text" placeholder="Buscar proveedores..." class="search-input">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <div class="suppliers-grid" id="suppliersGrid">
+                <!-- Aquí se cargarán los proveedores dinámicamente -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para agregar/editar proveedor -->
+    <div class="modal" id="supplierModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nuevo Proveedor</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="supplierForm">
+                    <input type="hidden" id="supplierId">
+
+                    <div class="form-group">
+                        <label>Nombre de la Empresa</label>
+                        <input type="text" id="companyName" required placeholder="Ejemplo: Bimbo">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="phone" required placeholder="Ejemplo: 555-123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico</label>
+                            <input type="email" id="email" required placeholder="Ejemplo: contacto@empresa.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <textarea id="address" rows="2" required placeholder="Calle, número, colonia, ciudad"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn-primary" onclick="saveSupplier()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script separado -->
+    <script src="js/gestionProveedores.js"></script>
+</body>
+</html>

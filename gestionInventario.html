@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario - Tienda NATY</title>
+    <link rel="stylesheet" href="css/gestionInventario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1 class="logo">Tienda NATY</h1>
+            <ul class="menu">
+                <li><a href="gestionProductos.html"><i class="fas fa-box"></i> Productos</a></li>
+                <li><a href="controlCompras.html"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                <li><a href="gestionInventario.html" class="active"><i class="fas fa-warehouse"></i> Inventario</a></li>
+                <li><a href="gestionVentas.html"><i class="fas fa-cash-register"></i> Ventas</a></li>
+                <li><a href="reportesEstadisticas.html"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                <li><a href="gestionProveedores.html"><i class="fas fa-truck"></i> Proveedores</a></li>
+                <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="cobrar.html"><i class="fas fa-money-bill-wave"></i> Cobrar</a></li>
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                 </li>
+
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Gestión de Inventario</h1>
+                <!-- Sin botón "Nuevo lote": los lotes vienen de Compras -->
+            </header>
+
+            <!-- Controles -->
+            <div class="inventory-controls">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Buscar productos en inventario..." class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                
+                <div class="filter-options">
+                    <select id="estadoFiltro" class="filter-select">
+                        <option value="all">Todos los estados</option>
+                        <option value="optimal">Stock Óptimo</option>
+                        <option value="medium">Stock Medio</option>
+                        <option value="low">Stock Bajo</option>
+                        <option value="empty">Stock Vacío</option>
+                    </select>
+                    <select id="categoriaFiltro" class="filter-select">
+                        <option value="all">Todas las categorías</option>
+                        <!-- Se llena dinámico -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Resumen -->
+            <div class="inventory-summary">
+                <div class="summary-card">
+                    <i class="fas fa-boxes"></i>
+                    <div class="summary-info">
+                        <h3>Total Productos</h3>
+                        <p id="totalProductos">0</p>
+                    </div>
+                </div>
+
+                <div class="summary-card warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="summary-info">
+                        <h3>Stock Bajo</h3>
+                        <p id="stockBajo">0</p>
+                    </div>
+                </div>
+
+                <div class="summary-card danger">
+                    <i class="fas fa-clock"></i>
+                    <div class="summary-info">
+                        <h3>Por Caducar</h3>
+                        <p id="porCaducar">0</p>
+                    </div>
+                </div>
+
+                <div class="summary-card danger">
+                    <i class="fas fa-ban"></i>
+                    <div class="summary-info">
+                        <h3>Vencidos</h3>
+                        <p id="vencidos">0</p>
+                    </div>
+                    <button class="btn-summary-link" id="btnVerVencidos">Ver</button>
+                </div>
+
+                <div class="summary-card success">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="summary-info">
+                        <h3>Stock Óptimo</h3>
+                        <p id="stockOptimo">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid inventario -->
+            <div class="inventory-grid" id="inventoryGrid">
+                <!-- Tarjetas generadas por JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Ver detalles -->
+    <div class="modal" id="detalleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="detalleTitulo">Detalle de producto</h2>
+                <button class="close-modal" id="cerrarDetalleBtn">&times;</button>
+            </div>
+            <div class="modal-body" id="detalleBody">
+                <!-- contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Editar fechas de caducidad -->
+    <div class="modal" id="caducidadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Fechas de caducidad por lote</h2>
+                <button class="close-modal" id="cerrarCaducidadBtn">&times;</button>
+            </div>
+            <div class="modal-body" id="caducidadBody">
+                <!-- inputs dinámicos -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelarCaducidadBtn">Cancelar</button>
+                <button class="btn-primary" id="guardarCaducidadBtn">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Historial de lotes agotados -->
+    <div class="modal" id="historialModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="historialTitulo">Historial de lotes agotados</h2>
+                <button class="close-modal" id="cerrarHistorialBtn">&times;</button>
+            </div>
+            <div class="modal-body" id="historialBody">
+                <!-- tabla dinámica -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Productos vencidos -->
+    <div class="modal" id="vencidosModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Productos vencidos</h2>
+                <button class="close-modal" id="cerrarVencidosBtn">&times;</button>
+            </div>
+            <div class="modal-body" id="vencidosBody">
+                <!-- contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast flotante -->
+    <div id="toast"></div>
+
+    <script src="js/gestionInventario.js"></script>
+</body>
+</html>

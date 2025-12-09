@@ -1,0 +1,360 @@
+/* Estilos para Punto de Venta */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #2A9D8F;
+    --primary-dark: #1F756A;
+    --secondary: #264653;
+    --accent: #E76F51;
+    --background: #F8F9FA;
+    --text: #333;
+    --gray: #6C757D;
+    --light-gray: #E9ECEF;
+    --white: #FFFFFF;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #DC2626;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background-color: var(--secondary);
+    padding: 20px;
+    color: var(--white);
+    position: fixed;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.menu a i {
+    margin-right: 10px;
+}
+
+.menu a.active,
+.menu a:hover {
+    background-color: var(--primary);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* POS Container */
+.pos-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    height: calc(100vh - 60px);
+}
+
+/* Sale Section */
+.sale-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.barcode-input {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.barcode-input input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 2px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.barcode-input input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.barcode-input i {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+    font-size: 20px;
+}
+
+/* Products List */
+.products-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: var(--light-gray);
+    position: sticky;
+    top: 0;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qty-btn {
+    background: var(--light-gray);
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.qty-btn:hover {
+    background: var(--gray);
+    color: var(--white);
+}
+
+.remove-item {
+    background: var(--danger);
+    color: var(--white);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.remove-item:hover {
+    background: #B91C1C;
+}
+
+/* Payment Section */
+.payment-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sale-summary {
+    border-bottom: 2px solid var(--light-gray);
+    padding-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.summary-item.total {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-top: 15px;
+}
+
+.payment-method h3 {
+    margin-bottom: 15px;
+    color: var(--secondary);
+}
+
+.payment-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.payment-btn {
+    background: var(--light-gray);
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.payment-btn i {
+    font-size: 24px;
+}
+
+.payment-btn.active {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.cash-input {
+    background: var(--light-gray);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.cash-input label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--secondary);
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.input-group span {
+    padding: 8px 12px;
+    background: var(--light-gray);
+    color: var(--gray);
+}
+
+.input-group input {
+    flex: 1;
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+}
+
+.input-group input:focus {
+    outline: none;
+}
+
+.change {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    color: var(--success);
+}
+
+.complete-sale {
+    background: var(--success);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s;
+    margin-top: auto;
+}
+
+.complete-sale:hover {
+    background: #059669;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .pos-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .pos-container {
+        height: auto;
+    }
+
+    .payment-options {
+        grid-template-columns: 1fr;
+    }
+}
+.logout-btn a {
+    background-color: #c0392b;
+    margin-top: 20px;
+    color: #fff !important;
+}
+
+.logout-btn a:hover {
+    background-color: #e74c3c;
+}

@@ -1,0 +1,714 @@
+/* ==========================
+   Control de Compras
+   Mismo estilo que gestiónProductos
+   ========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #2A9D8F;
+    --primary-dark: #1F756A;
+    --secondary: #264653;
+    --accent: #E76F51;
+    --background: #F8F9FA;
+    --text: #333;
+    --gray: #6C757D;
+    --light-gray: #E9ECEF;
+    --white: #FFFFFF;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --success: #D1FAE5;
+    --success-text: #059669;
+    --danger: #FEE2E2;
+    --danger-text: #DC2626;
+    --warning: #FEF3C7;
+    --warning-text: #D97706;
+}
+
+/* Layout general */
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar (igual que en otros módulos) */
+
+.sidebar {
+    width: 250px;
+    background-color: var(--secondary);
+    padding: 20px;
+    color: var(--white);
+    position: fixed;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.menu a i {
+    margin-right: 10px;
+}
+
+.menu a.active,
+.menu a:hover {
+    background-color: var(--primary);
+}
+
+/* Main content */
+
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* Top bar */
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.top-bar h1 {
+    font-size: 28px;
+    color: var(--secondary);
+}
+
+/* Botón "Nueva Compra" (igual estilo que btn-add en otros módulos) */
+
+.btn-add {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.btn-add i {
+    font-size: 14px;
+}
+
+.btn-add:hover {
+    background-color: var(--primary-dark);
+}
+
+/* ==========================
+   Filtros / Buscador
+   ========================== */
+
+.filters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--white);
+    color: var(--text);
+}
+
+.search-input::placeholder {
+    color: var(--gray);
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+}
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.filter-select,
+.date-input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--light-gray);
+    background-color: var(--white);
+    font-size: 14px;
+    color: var(--text);
+    min-width: 170px;
+}
+
+.date-filter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--gray);
+}
+
+/* ==========================
+   Tarjetas de compras
+   ========================== */
+
+.purchases-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.purchase-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.purchase-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.purchase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.purchase-header h3 {
+    font-size: 18px;
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* Badge de estado (misma lógica que productos/proveedores) */
+
+.status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status.pending {
+    background-color: var(--warning);
+    color: var(--warning-text);
+}
+
+.status.completed {
+    background-color: var(--success);
+    color: var(--success-text);
+}
+
+.status.canceled {
+    background-color: var(--danger);
+    color: var(--danger-text);
+}
+
+/* Información de la compra */
+
+.purchase-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.purchase-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.purchase-info p i {
+    margin-right: 6px;
+    color: var(--primary);
+}
+
+/* ==========================
+   Acciones en tarjeta
+   ========================== */
+
+.purchase-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+/* Contenedor del select + botón guardar estado */
+.status-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Select de estado: mismo look que inputs, pero compacto */
+.estado-select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--light-gray);
+    background-color: var(--white);
+    font-size: 12px;
+    color: var(--text);
+    cursor: pointer;
+    max-width: 150px;
+}
+
+.estado-select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Botón guardar estado: estilo coherente con botones de acción */
+.btn-update-estado {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-update-estado i {
+    font-size: 14px;
+}
+
+.btn-update-estado:hover {
+    background-color: var(--primary-dark);
+    transform: scale(1.05);
+}
+
+/* Botones de acción (mismo patrón que gestiónProductos) */
+
+.btn-view,
+.btn-delete {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+    padding: 0;
+}
+
+/* Ver detalle */
+.btn-view {
+    background-color: var(--light-gray);
+    color: var(--secondary);
+}
+
+.btn-view:hover {
+    background-color: #dcdfe3;
+    transform: scale(1.05);
+}
+
+/* Eliminar */
+.btn-delete {
+    background-color: var(--danger);
+    color: var(--danger-text);
+}
+
+.btn-delete:hover {
+    background-color: #fecaca;
+    transform: scale(1.05);
+}
+
+/* ==========================
+   Modales (copiados del estilo general)
+   ========================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--white);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: modalFadeIn 0.3s ease-out;
+    padding: 0;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--light-gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: var(--secondary);
+    font-size: 20px;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gray);
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    padding: 14px 20px 16px;
+    border-top: 1px solid var(--light-gray);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Botones modales igual que en otros módulos */
+
+.btn-secondary {
+    background-color: var(--light-gray);
+    color: var(--gray);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 14px;
+}
+
+.btn-secondary:hover {
+    background-color: #DEE2E6;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 14px;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+/* ==========================
+   Formulario nueva compra
+   ========================== */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--light-gray);
+    font-size: 14px;
+    background-color: var(--white);
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* Lista de productos dentro del modal */
+
+.product-list-container {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #F3F4F6;
+    border-radius: 8px;
+    border: 1px solid var(--light-gray);
+}
+
+.product-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.product-list-header h3 {
+    font-size: 16px;
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+.btn-add-product {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    transition: background-color 0.3s;
+}
+
+.btn-add-product:hover {
+    background-color: var(--primary-dark);
+}
+
+.product-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.product-item {
+    display: grid;
+    grid-template-columns: 2.5fr 0.7fr 1fr 1fr 30px;
+    gap: 6px;
+    align-items: center;
+}
+
+.product-item select,
+.product-item input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--light-gray);
+    font-size: 13px;
+}
+
+.product-subtotal span {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.btn-remove-product {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--danger);
+    color: var(--danger-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Resumen de compra */
+
+.purchase-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+    font-size: 13px;
+    color: var(--gray);
+}
+
+.summary-item.total span:last-child {
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
+/* ==========================
+   Detalle de compra
+   ========================== */
+
+.detail-section {
+    margin-bottom: 12px;
+}
+
+.detail-section h3 {
+    font-size: 16px;
+    color: var(--secondary);
+    margin-bottom: 6px;
+}
+
+.detail-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 6px 12px;
+    font-size: 13px;
+}
+
+.detail-row {
+    display: flex;
+    gap: 4px;
+}
+
+.detail-label {
+    font-weight: 500;
+    color: var(--secondary);
+}
+
+.detail-value {
+    color: var(--gray);
+}
+
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.detail-table th,
+.detail-table td {
+    padding: 6px 8px;
+    border: 1px solid var(--light-gray);
+}
+
+.detail-table th {
+    background-color: #F3F4F6;
+    font-weight: 500;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .purchases-container {
+        grid-template-columns: 1fr;
+    }
+
+    .purchase-actions {
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+}
+.logout-btn a {
+    background-color: #c0392b;
+    margin-top: 20px;
+    color: #fff !important;
+}
+
+.logout-btn a:hover {
+    background-color: #e74c3c;
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes y Estadísticas - Tienda NATY</title>
+    <link rel="stylesheet" href="css/reportesEstadisticas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h1 class="logo">Tienda NATY</h1>
+            <ul class="menu">
+                <li><a href="gestionProductos.html"><i class="fas fa-box"></i> Productos</a></li>
+                <li><a href="controlCompras.html"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                <li><a href="gestionInventario.html"><i class="fas fa-warehouse"></i> Inventario</a></li>
+                <li><a href="gestionVentas.html"><i class="fas fa-cash-register"></i> Ventas</a></li>
+                <li><a href="reportesEstadisticas.html" class="active"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                <li><a href="gestionProveedores.html"><i class="fas fa-truck"></i> Proveedores</a></li>
+                <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="cobrar.html"><i class="fas fa-money-bill-wave"></i> Cobrar</a></li>
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                 </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Reportes y Estadísticas</h1>
+                <div class="report-actions">
+                    <button id="btnExportar" class="btn-export">
+                        <i class="fas fa-file-export"></i> Exportar
+                    </button>
+                    <button id="btnImprimir" class="btn-print">
+                        <i class="fas fa-print"></i> Imprimir
+                    </button>
+                </div>
+            </header>
+
+            <div class="report-controls">
+                <div class="date-range">
+                    <div class="date-input">
+                        <label>Desde:</label>
+                        <input type="date" id="filtroDesde">
+                    </div>
+                    <div class="date-input">
+                        <label>Hasta:</label>
+                        <input type="date" id="filtroHasta">
+                    </div>
+                    <button id="btnAplicar" class="btn-apply">Aplicar</button>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+
+                <!-- KPI Ventas Totales -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3>Ventas Totales</h3>
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div id="kpiVentasTotales" class="metric-value">$0.00</div>
+                    <div id="kpiVentasTrend" class="metric-trend"></div>
+                </div>
+
+                <!-- KPI Productos Vendidos -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3>Productos Vendidos</h3>
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div id="kpiProductosVendidos" class="metric-value">0</div>
+                    <div id="kpiProductosTrend" class="metric-trend"></div>
+                </div>
+
+                <!-- KPI Margen -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3>Margen de Ganancia</h3>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div id="kpiMargen" class="metric-value">0%</div>
+                    <div id="kpiMargenTrend" class="metric-trend"></div>
+                </div>
+
+                <!-- KPI Ticket -->
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h3>Ticket Promedio</h3>
+                        <i class="fas fa-receipt"></i>
+                    </div>
+                    <div id="kpiTicket" class="metric-value">$0.00</div>
+                    <div id="kpiTicketTrend" class="metric-trend"></div>
+                </div>
+            </div>
+
+            <div class="reports-section">
+
+                <!-- TOP PRODUCTOS -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3>Productos Más Vendidos</h3>
+                    </div>
+                    <div class="report-content">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Unidades</th>
+                                    <th>Ingresos</th>
+                                    <th>Tendencia</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaTopProductos">
+                                <!-- Aquí van los productos reales -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CATEGORÍAS -->
+                <div class="report-card">
+                    <div class="report-header">
+                        <h3>Ventas por Categoría</h3>
+                    </div>
+                    <div class="report-content">
+                        <canvas id="graficoCategorias"></canvas>
+                    </div>
+                </div>
+
+                <!-- TENDENCIA -->
+                <div class="report-card full-width">
+                    <div class="report-header">
+                        <h3>Tendencia de Ventas</h3>
+                        <select id="periodoTendencia" class="period-select">
+                            <option value="7">Últimos 7 días</option>
+                            <option value="30">Último mes</option>
+                            <option value="365">Último año</option>
+                        </select>
+                    </div>
+                    <div class="report-content">
+                        <canvas id="graficoTendencia"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="js/reportesEstadisticas.js"></script>
+</body>
+</html>

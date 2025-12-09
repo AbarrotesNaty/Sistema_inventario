@@ -1,0 +1,273 @@
+/* Estilos módulo Alertas - Tienda NATY */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary: #2A9D8F;
+    --primary-dark: #1F756A;
+    --secondary: #264653;
+    --accent: #E76F51;
+    --background: #F8F9FA;
+    --text: #333;
+    --gray: #6C757D;
+    --light-gray: #E9ECEF;
+    --white: #FFFFFF;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --success: #38A169;
+    --warning: #F59E0B;
+    --danger: #DC2626;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar (igual que otros módulos) */
+.sidebar {
+    width: 250px;
+    background-color: var(--secondary);
+    padding: 20px;
+    color: var(--white);
+    position: fixed;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu a {
+    color: var(--white);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.menu a i {
+    margin-right: 10px;
+}
+
+.menu a.active,
+.menu a:hover {
+    background-color: var(--primary);
+}
+
+/* Main content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.top-bar h1 {
+    font-size: 28px;
+    color: var(--secondary);
+}
+
+/* Controles */
+.alerts-controls {
+    margin-bottom: 20px;
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: var(--white);
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+}
+
+.filter-options {
+    display: flex;
+    gap: 15px;
+}
+
+.filter-select {
+    padding: 10px;
+    border: 1px solid var(--light-gray);
+    border-radius: 6px;
+    font-size: 14px;
+    min-width: 180px;
+    background-color: var(--white);
+}
+
+/* Lista de alertas */
+.alerts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tarjeta de alerta */
+.alert-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background-color: var(--white);
+    padding: 16px 18px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary);
+}
+
+.alert-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: var(--light-gray);
+    color: var(--secondary);
+    font-size: 16px;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 4px;
+}
+
+.alert-message {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 2px;
+}
+
+.alert-meta {
+    font-size: 11px;
+    color: var(--gray);
+}
+
+/* Colores según tipo */
+.alert-card.stock-bajo {
+    border-left-color: var(--warning);
+}
+
+.alert-card.stock-bajo .alert-icon {
+    background-color: #FEF3C7;
+    color: var(--warning);
+}
+
+.alert-card.por-vencer {
+    border-left-color: var(--accent);
+}
+
+.alert-card.por-vencer .alert-icon {
+    background-color: #FFF7ED;
+    color: var(--accent);
+}
+
+.alert-card.vencido {
+    border-left-color: var(--danger);
+}
+
+.alert-card.vencido .alert-icon {
+    background-color: #FEE2E2;
+    color: var(--danger);
+}
+
+/* Mensajes vacíos */
+.alerts-empty {
+    font-size: 14px;
+    color: var(--gray);
+    margin-top: 10px;
+}
+
+/* Toast (opcional, mismo estilo que inventario) */
+#toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--danger);
+    color: var(--white);
+    padding: 10px 16px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    font-size: 14px;
+    display: none;
+    z-index: 2000;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#toast.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+}
+.logout-btn a {
+    background-color: #c0392b;
+    margin-top: 20px;
+    color: #fff !important;
+}
+
+.logout-btn a:hover {
+    background-color: #e74c3c;
+}

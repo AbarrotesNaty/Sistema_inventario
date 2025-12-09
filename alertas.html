@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alertas - Tienda NATY</title>
+    <link rel="stylesheet" href="css/alertas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1 class="logo">Tienda NATY</h1>
+            <ul class="menu">
+                <li><a href="gestionProductos.html"><i class="fas fa-box"></i> Productos</a></li>
+                <li><a href="controlCompras.html"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                <li><a href="gestionInventario.html"><i class="fas fa-warehouse"></i> Inventario</a></li>
+                <li><a href="gestionVentas.html"><i class="fas fa-cash-register"></i> Ventas</a></li>
+                <li><a href="reportesEstadisticas.html"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                <li><a href="gestionProveedores.html"><i class="fas fa-truck"></i> Proveedores</a></li>
+                <li><a href="alertas.html" class="active"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="cobrar.html"><i class="fas fa-money-bill-wave"></i> Cobrar</a></li>
+
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                 </li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Alertas del Inventario</h1>
+            </header>
+
+            <!-- Controles -->
+            <div class="alerts-controls">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Buscar en alertas..." class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+
+                <div class="filter-options">
+                    <select id="tipoFiltro" class="filter-select">
+                        <option value="all">Todas</option>
+                        <option value="stock_bajo">Stock Bajo</option>
+                        <option value="por_vencer">Por Vencer</option>
+                        <option value="vencido">Vencidos</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Lista de alertas -->
+            <div id="alertsList" class="alerts-list">
+                <!-- tarjetas dinámicas -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast (para errores si hace falta) -->
+    <div id="toast"></div>
+
+    <script src="js/alertas.js"></script>
+</body>
+</html>

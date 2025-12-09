@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ticket de Venta</title>
+<style>
+    body {
+        font-family: monospace;
+        width: 280px;
+        margin: 0 auto;
+        font-size: 14px;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .center { text-align: center; }
+    .line { border-top: 1px dashed #000; margin: 10px 0; }
+
+    table { width: 100%; }
+    td { padding: 2px 0; }
+
+    .right { text-align: right; }
+    .bold { font-weight: bold; }
+</style>
+</head>
+<body>
+
+<div class="title">TIENDA NATY</div>
+<div class="center">RFC: NATY-0001</div>
+<div class="center">Fraccionamiento Las Rosas</div>
+<div class="center">1er local, 2da etapa</div>
+<div class="line"></div>
+
+<div id="ticket-data"></div>
+
+<script>
+    const ticket = JSON.parse(localStorage.getItem("ticket_venta"));
+
+    if (!ticket) {
+        document.body.innerHTML = "<h3>Error al cargar ticket</h3>";
+    } else {
+        const cont = document.getElementById("ticket-data");
+
+        let html = `
+            <div><b>Folio:</b> ${ticket.id_venta}</div>
+            <div><b>Fecha:</b> ${ticket.fecha}</div>
+            <div><b>Cajero:</b> ${ticket.usuario}</div>
+            <div class="line"></div>
+            <table>
+        `;
+
+        ticket.items.forEach(p => {
+            html += `
+                <tr>
+                    <td>${p.cantidad} x ${p.nombre}</td>
+                    <td class="right">$${p.subtotal.toFixed(2)}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+            </table>
+            <div class="line"></div>
+            <div class="bold right">TOTAL: $${ticket.total.toFixed(2)}</div>
+            <div class="right">Efectivo: $${ticket.efectivo.toFixed(2)}</div>
+            <div class="right">Cambio: $${ticket.cambio.toFixed(2)}</div>
+            <div class="line"></div>
+            <div class="center">¡Gracias por su compra!</div>
+        `;
+
+        cont.innerHTML = html;
+
+        setTimeout(() => { window.print(); }, 500);
+    }
+</script>
+
+</body>
+</html>

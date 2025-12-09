@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - Tienda NATY</title>
+    <link rel="stylesheet" href="css/gestionProductos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar (idéntico al de proveedores) -->
+        <nav class="sidebar">
+            <h1 class="logo">Tienda NATY</h1>
+            <ul class="menu">
+                <li><a href="gestionProductos.html" class="active"><i class="fas fa-box"></i> Productos</a></li>
+                <li><a href="controlCompras.html"><i class="fas fa-shopping-cart"></i> Compras</a></li>
+                <li><a href="gestionInventario.html"><i class="fas fa-warehouse"></i> Inventario</a></li>
+                <li><a href="gestionVentas.html"><i class="fas fa-cash-register"></i> Ventas</a></li>
+                <li><a href="reportesEstadisticas.html"><i class="fas fa-chart-bar"></i> Reportes</a></li>
+                <li><a href="gestionProveedores.html"><i class="fas fa-truck"></i> Proveedores</a></li>
+                <li><a href="alertas.html"><i class="fas fa-bell"></i> Alertas</a></li>
+                <li><a href="cobrar.html"><i class="fas fa-money-bill-wave"></i> Cobrar</a></li>
+                <li class="logout-btn">
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                    </a>
+                 </li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Gestión de Productos</h1>
+                <button class="btn-add" onclick="openModal('new')">
+                    <i class="fas fa-plus"></i> Nuevo Producto
+                </button>
+            </header>
+
+            <!-- Buscador -->
+            <div class="search-container">
+                <input id="searchBox" type="text" placeholder="Buscar productos..." class="search-input">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <!-- Grid de productos -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Cards dinámicas -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Producto (misma estructura visual que proveedores) -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Nuevo Producto</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="codigoProducto">
+
+                    <div class="form-group">
+                        <label>Código de Barras</label>
+                        <input type="text" id="codigoBarras" required placeholder="Ejemplo: 7501234567890">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nombre del Producto</label>
+                        <input type="text" id="nombre" required placeholder="Ejemplo: Pepsi 3L">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea id="descripcion" rows="2" placeholder="Opcional"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <input type="text" id="categoria" placeholder="Ejemplo: Bebidas">
+                        </div>
+                        <div class="form-group">
+                            <label>Unidad de Medida</label>
+                            <input type="text" id="unidadMedida" placeholder="Ejemplo: pieza, litro, etc.">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Precio de Venta</label>
+                            <input type="number" id="precioVenta" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Stock mínimo</label>
+                            <input type="number" id="stockMinimo" min="0" placeholder="0">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Proveedor</label>
+                            <select id="proveedorId" required>
+                                <option value="">Selecciona un proveedor...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Precio sugerido (proveedor)</label>
+                            <input type="number" id="precioSugerido" min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Estado</label>
+                        <select id="estado">
+                            <option value="Activo" selected>Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn-primary" id="btnGuardar" onclick="saveProduct()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.API_BASE = window.API_BASE || 'http://127.0.0.1:3000';
+    </script>
+    <script src="js/gestionProductos.js"></script>
+</body>
+</html>
