@@ -29,7 +29,7 @@ inputCodigo.addEventListener("keypress", async (e) => {
         if (codigo === "") return;
 
         try {
-            const res = await fetch(`http://localhost:3000/api/ventas/producto/${codigo}`);
+            const res = await fetch(`https://backend-naty.onrender.com/api/ventas/producto/${codigo}`);
 
             if (!res.ok) {
                 alert("Producto no encontrado o sin stock.");
@@ -176,7 +176,7 @@ btnCobrar.addEventListener("click", async () => {
     };
 
     try {
-        const res = await fetch("http://localhost:3000/api/ventas", {
+        const res = await fetch("https://backend-naty.onrender.com/api/ventas", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -218,5 +218,5 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    window.location.href = "index.html"; // 🔥 Ahora sí manda al login
+    window.location.href = "login.html"; // 🔥 Ahora sí manda al login
 });

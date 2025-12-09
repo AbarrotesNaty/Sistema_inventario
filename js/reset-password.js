@@ -19,7 +19,7 @@ form.addEventListener('submit', async (e) => {
     }
 
     try {
-        const resp = await fetch(`http://localhost:3000/api/auth/reset-password/${token}`, {
+        const resp = await fetch(`https://backend-naty.onrender.com/api/auth/reset-password/${token}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ nuevaPassword: password })
