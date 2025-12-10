@@ -1,10 +1,12 @@
-// js/login.js
+// js/index.js
 
+// Obtener referencia al formulario de login
 const form =
   document.getElementById('loginForm') ||
   document.querySelector('form[data-form="login"]') ||
   document.querySelector('form');
 
+// Funciones para obtener input del correo
 function getCorreoInput() {
   return (
     document.getElementById('correo') ||
@@ -15,6 +17,7 @@ function getCorreoInput() {
   );
 }
 
+// Funciones para obtener input de contraseña
 function getPasswordInput() {
   return (
     document.getElementById('password') ||
@@ -25,11 +28,13 @@ function getPasswordInput() {
   );
 }
 
+// Área para mostrar errores
 const errorMsg =
   document.getElementById('errorMsg') ||
   document.querySelector('.error-msg') ||
   null;
 
+// Evento submit del login
 if (form) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -51,6 +56,7 @@ if (form) {
     const password = passInput.value.trim();
 
     try {
+      // 🔥 URL del backend en Render (CORRECTA)
       const resp = await fetch('https://backend-naty.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -60,20 +66,22 @@ if (form) {
       const data = await resp.json();
 
       if (resp.ok) {
-        // guardar sesión
+        // Guardar sesión
         localStorage.setItem('token', data.token);
         localStorage.setItem('usuario', JSON.stringify(data.usuario));
 
-        // 🔥 ID DEL USUARIO (EL BUENO)
+        // Guardar ID del usuario
         localStorage.setItem('id_usuario', data.usuario.id_usuario);
 
         const rol = data.usuario.tipo_usuario;
 
+        // Redirección según rol
         if (rol === 'Administrador') {
           window.location.href = 'gestionProductos.html';
         } else {
           alert('Inicio de sesión correcto, pero tu rol no es Administrador.');
         }
+
       } else {
         const msg = data.error || 'No se pudo iniciar sesión';
         if (errorMsg) {
@@ -83,8 +91,10 @@ if (form) {
           alert(msg);
         }
       }
+
     } catch (err) {
       console.error(err);
+
       if (errorMsg) {
         errorMsg.textContent = 'No se pudo conectar con el servidor';
         errorMsg.style.display = 'block';
